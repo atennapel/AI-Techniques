@@ -21,14 +21,19 @@ import negotiator.issue.ValueReal;
 import negotiator.timeline.Timeline;
 
 /**
- * @author W.Pasman Some improvements over the standard SimpleAgent.
+ * The agent of group 24 for AI Techniques 2017
  * 
- *         Random Walker, Zero Intelligence Agent
+ * @author Albert ten Napel
+ * @author Luc Hogervorst
+ * @author Nirul Hoeba
+ * @author Marc Barendse
+ * 
  */
 @SuppressWarnings("serial")
 public class Group24 extends Agent {
 	private Action actionOfPartner = null;
 	private Bid lastPartnerBid;
+
 	/**
 	 * Note: {@link SimpleAgent} does not account for the discount factor in its
 	 * computations
@@ -45,12 +50,17 @@ public class Group24 extends Agent {
 
 	@Override
 	public String getVersion() {
-		return "3.1";
+		return "1.0";
 	}
 
 	@Override
 	public String getName() {
-		return "Simple Agent";
+		return "Group 24 Agent";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "This is the agent of group 24";
 	}
 
 	@Override
