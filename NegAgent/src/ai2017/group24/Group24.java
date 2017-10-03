@@ -74,7 +74,7 @@ public class Group24 extends Agent {
 	@Override
 	public Action chooseAction() {
 		Action action = null;
-
+		// test
 		try {
 			if (actionOfPartner == null)
 				action = chooseRandomBidAction();
