@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Random;
 
 import agents.SimpleAgent;
-import negotiator.Agent;
 import negotiator.Bid;
 import negotiator.actions.Accept;
 import negotiator.actions.Action;
 import negotiator.actions.EndNegotiation;
 import negotiator.actions.Offer;
+import negotiator.boaframework.BOAagent;
 import negotiator.issue.Issue;
 import negotiator.issue.IssueDiscrete;
 import negotiator.issue.IssueInteger;
@@ -30,7 +30,7 @@ import negotiator.timeline.Timeline;
  * 
  */
 @SuppressWarnings("serial")
-public class Group24 extends Agent {
+public class Group24 extends BOAagent {
 	private Action actionOfPartner = null;
 	private Bid lastPartnerBid;
 
@@ -46,6 +46,11 @@ public class Group24 extends Agent {
 	@Override
 	public void init() {
 		MINIMUM_BID_UTILITY = utilitySpace.getReservationValueUndiscounted();
+	}
+	
+
+	@Override
+	public void agentSetup() {
 	}
 
 	@Override
@@ -217,4 +222,5 @@ public class Group24 extends Agent {
 	double sq(double x) {
 		return x * x;
 	}
+
 }
