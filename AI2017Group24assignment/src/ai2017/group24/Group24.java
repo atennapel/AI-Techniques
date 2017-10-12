@@ -51,6 +51,12 @@ public class Group24 extends BOAagent {
 
 	@Override
 	public void agentSetup() {
+		setDecoupledComponents(
+			null, // Acceptance condition
+			null, // Bidding Strategy
+			new FrequencyAnalysis(), // Opponent modeling
+			null
+		);
 	}
 
 	@Override
