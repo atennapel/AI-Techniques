@@ -19,6 +19,12 @@ import negotiator.utility.AdditiveUtilitySpace;
 import negotiator.utility.Evaluator;
 import negotiator.utility.EvaluatorDiscrete;
 
+/**
+ * Group 24 Frequency analysis opponent model
+ * Adapted from boaexamplepackage/HardHeadedFrequencyModel
+ * 
+ * @author Albert ten Napel
+ */
 public class FrequencyAnalysis extends OpponentModel {
 	
 	private double weightDelta;

@@ -55,7 +55,7 @@ public class Group24 extends BOAagent {
 			null, // Acceptance condition
 			null, // Bidding Strategy
 			new FrequencyAnalysis(), // Opponent modeling
-			null
+			new BestBid() // OMStrategy
 		);
 	}
 
