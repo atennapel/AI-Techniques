@@ -18,7 +18,8 @@ public class ACNext extends AcceptanceStrategy {
 	}
 	
 	@Override 
-	public void init(NegotiationSession session, OfferingStrategy strategy, OpponentModel opponentModel, Map<String, Double> parameters) {
+	public void init(NegotiationSession session, OfferingStrategy strategy, OpponentModel opponentModel, Map<String, Double> parameters) throws Exception {
+		super.init(session, strategy, opponentModel, parameters);
 		this.negotiationSession = session;
 		this.offeringStrategy = strategy;
 	}
