@@ -27,8 +27,13 @@ import negotiator.utility.EvaluatorDiscrete;
  */
 public class FrequencyAnalysis extends OpponentModel {
 	
-	private double weightDelta;
+	private double weightDelta = 0.1;
 	private int amountOfIssues;
+	
+	public FrequencyAnalysis(NegotiationSession session) {
+		negotiationSession = session;
+		initializeModel();
+	}
 	
 	@Override
 	public String getName() {
@@ -51,8 +56,6 @@ public class FrequencyAnalysis extends OpponentModel {
 		
 		if(parameters != null && parameters.get("weightDelta") != null)
 			weightDelta = parameters.get("weightDelta");
-		else
-			weightDelta = 0.1;
 		
 		initializeModel();
 	}

@@ -1,7 +1,7 @@
 package ai2017.group24;
 
-import negotiator.SupportedNegotiationSetting;
 import negotiator.boaframework.BOAagent;
+import negotiator.boaframework.OfferingStrategy;
 import negotiator.utility.UTILITYSPACETYPE;
 
 /**
@@ -19,10 +19,11 @@ public class Group24 extends BOAagent {
 	@Override
 	public void agentSetup() {
 		getSupportedNegotiationSetting().setUtilityspaceType(UTILITYSPACETYPE.LINEAR);
+		OfferingStrategy bidder = new RandomWalker(negotiationSession);
 		setDecoupledComponents(
-			new ACNext(), // Acceptance condition
-			new RandomWalker(this.negotiationSession), // Bidding Strategy
-			new FrequencyAnalysis(), // Opponent modeling
+			new ACNext(negotiationSession, bidder), // Acceptance condition
+			bidder, // Bidding Strategy
+			new FrequencyAnalysis(negotiationSession), // Opponent modeling
 			new BestBid() // OMStrategy
 		);
 	}

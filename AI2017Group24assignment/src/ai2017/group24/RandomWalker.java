@@ -32,7 +32,7 @@ public class RandomWalker extends OfferingStrategy {
 	}
 	
 	public RandomWalker(NegotiationSession session) {
-		this.negotiationSession = session;
+		negotiationSession = session;
 	}
 	
 	@Override

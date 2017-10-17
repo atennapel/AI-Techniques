@@ -12,6 +12,11 @@ import negotiator.boaframework.*;
  */
 public class ACNext extends AcceptanceStrategy {
 
+	public ACNext(NegotiationSession session, OfferingStrategy strategy) {
+		negotiationSession = session;
+		offeringStrategy = strategy;
+	}
+	
 	@Override
 	public String getName() {
 		return "Group 24 AC Next";
