@@ -31,9 +31,14 @@ public class RandomWalker extends OfferingStrategy {
 		return "Random walker";
 	}
 	
+	public RandomWalker(NegotiationSession session) {
+		this.negotiationSession = session;
+	}
+	
 	@Override
 	public void init(NegotiationSession session, OpponentModel model, OMStrategy oms, Map<String, Double> parameters) throws Exception {
 		super.init(session, model, oms, parameters);
+		this.negotiationSession = session;
 	}
 	
 	@Override
