@@ -23,6 +23,8 @@ import negotiator.utility.EvaluatorDiscrete;
  * Group 24 Frequency analysis opponent model
  * Adapted from boaexamplepackage/HardHeadedFrequencyModel
  * 
+ * !!!Only works with discrete values!!!
+ * 
  * @author Albert ten Napel
  */
 public class FrequencyAnalysis extends OpponentModel {
