@@ -32,9 +32,7 @@ public class FrequencyAnalysis extends OpponentModel {
 	private double weightDelta = 0.1;
 	private int amountOfIssues;
 	
-	public FrequencyAnalysis(NegotiationSession session) {
-		negotiationSession = session;
-		initializeModel();
+	public FrequencyAnalysis() {
 	}
 	
 	@Override

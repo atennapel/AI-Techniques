@@ -1,10 +1,13 @@
 package ai2017.group24;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import negotiator.bidding.BidDetails;
+import negotiator.boaframework.NegotiationSession;
 import negotiator.boaframework.OMStrategy;
+import negotiator.boaframework.OpponentModel;
 
 /**
  * Group 24 Best bid OM strategy
@@ -14,11 +17,20 @@ import negotiator.boaframework.OMStrategy;
  */
 public class BestBid extends OMStrategy {
 	
+	public BestBid() {
+	}
+	
 	@Override
 	public String getName() {
 		return "Best Bid";
 	}
 
+	@Override
+	public void init(NegotiationSession negotiationSession, OpponentModel model, Map<String, Double> parameters) {
+		super.init(negotiationSession, model, parameters);
+		this.model = model;
+	}
+	
 	@Override
 	public boolean canUpdateOM() {
 		return true;

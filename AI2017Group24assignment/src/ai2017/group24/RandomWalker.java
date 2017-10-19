@@ -20,8 +20,7 @@ public class RandomWalker extends OfferingStrategy {
 		return "Random walker";
 	}
 	
-	public RandomWalker(NegotiationSession session) {
-		negotiationSession = session;
+	public RandomWalker() {
 	}
 	
 	@Override

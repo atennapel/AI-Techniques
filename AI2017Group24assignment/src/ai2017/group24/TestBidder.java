@@ -5,41 +5,30 @@ import java.util.Map;
 import negotiator.bidding.BidDetails;
 import negotiator.boaframework.*;
 
-/**
- * Group 24 NewBidder
- * Adapted from src/RandomWalker.java
- * 
- * @author Nirul Hoeba
- */
-
-public class NewBidder extends OfferingStrategy {
-
-	private SortedOutcomeSpace outcomespace;
-	
-	public NewBidder() {
-	}
+public class TestBidder extends OfferingStrategy {
 	
 	@Override
 	public String getName() {
-		return "NewBidder";
+		return "TestBidder";
+	}
+	
+	public TestBidder() {
 	}
 	
 	@Override
 	public void init(NegotiationSession session, OpponentModel model, OMStrategy oms, Map<String, Double> parameters) throws Exception {
 		super.init(session, model, oms, parameters);
-		
-		this.negotiationSession = session;
-		this.opponentModel = model;
-		this.omStrategy = oms;
-		
-		outcomespace = new SortedOutcomeSpace(negotiationSession.getUtilitySpace());
-		negotiationSession.setOutcomeSpace(outcomespace);
+		negotiationSession = session;
+		opponentModel = model;
+		omStrategy = oms;
 	}
 	
 	@Override
 	public BidDetails determineNextBid() {
 		try {
-			return getNewBid();
+			BidDetails bid = getNewBid();
+			System.out.println(bid);
+			return bid;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -57,10 +46,7 @@ public class NewBidder extends OfferingStrategy {
 	}
 	
 	private BidDetails getNewBid() throws Exception {
-		double utilityGoal = 0;
-		nextBid = omStrategy.getBid(outcomespace, utilityGoal);
-		return new BidDetails(null,0);
-	}
-				
+		return omStrategy.getBid(Util.getBidsInRange(negotiationSession, 0.5, 1));	
+	}	
 
 }

@@ -1,8 +1,10 @@
 package ai2017.group24;
 
+import negotiator.boaframework.AcceptanceStrategy;
 import negotiator.boaframework.BOAagent;
+import negotiator.boaframework.OMStrategy;
 import negotiator.boaframework.OfferingStrategy;
-import negotiator.utility.UTILITYSPACETYPE;
+import negotiator.boaframework.OpponentModel;
 
 /**
  * The agent of group 24 for AI Techniques 2017
@@ -14,17 +16,32 @@ import negotiator.utility.UTILITYSPACETYPE;
  * 
  */
 @SuppressWarnings("serial")
-public class Group24 extends BOAagent {	
+public class Group24 extends BOAagent {
 
 	@Override
-	public void agentSetup() {
-		getSupportedNegotiationSetting().setUtilityspaceType(UTILITYSPACETYPE.LINEAR);
-		OfferingStrategy bidder = new RandomWalker(negotiationSession);
+	public void agentSetup() {		
+		// create all the boa components
+		AcceptanceStrategy acStrategy = new ACNext();
+		OfferingStrategy bidder = new TestBidder();
+		OpponentModel model = new FrequencyAnalysis();
+		OMStrategy omStrategy = new BestBid();
+		
+		// initialize them
+		try {
+			acStrategy.init(negotiationSession, bidder, model, null);
+			bidder.init(negotiationSession, model, omStrategy, null);
+			model.init(negotiationSession, null);
+			omStrategy.init(negotiationSession, model, null);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		// set the components
 		setDecoupledComponents(
-			new ACNext(negotiationSession, bidder), // Acceptance condition
+			acStrategy, // Acceptance condition
 			bidder, // Bidding Strategy
-			new FrequencyAnalysis(negotiationSession), // Opponent modeling
-			new BestBid() // OMStrategy
+			model, // Opponent modeling
+			omStrategy // OMStrategy
 		);
 	}
 
