@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import misc.Pair;
 import misc.Range;
 import negotiator.Bid;
 import negotiator.Domain;
@@ -20,7 +21,78 @@ import negotiator.issue.ValueInteger;
 import negotiator.issue.ValueReal;
 import negotiator.utility.AbstractUtilitySpace;
 
+/**
+ * Utility methods for agents
+ * 
+ * @author Albert ten Napel
+ */
 public class Util {
+	
+	/**
+	 * Get the max bid in a list of BidDetails from some utility space
+	 * Returns null if the list is empty!
+	 */
+	static public Pair<BidDetails, Double> getMaximumBid(AbstractUtilitySpace utilitySpace, List<BidDetails> bids, double time) {
+		double maxUtility = 0;
+		BidDetails maxBid = null;
+		for(BidDetails bid : bids) {
+			double currentUtility = utilitySpace.getUtilityWithDiscount(bid.getBid(), time);
+			if(currentUtility > maxUtility) {
+				maxUtility = currentUtility;
+				maxBid = bid;
+			}
+		}
+		return new Pair<BidDetails, Double>(maxBid, maxUtility);
+	}
+	
+	/**
+	 * Get the min bid in a list of BidDetails from some utility space
+	 * Returns null if the list is empty!
+	 */
+	static public Pair<BidDetails, Double> getMinimumBid(AbstractUtilitySpace utilitySpace, List<BidDetails> bids, double time) {
+		double minUtility = 1;
+		BidDetails minBid = null;
+		for(BidDetails bid : bids) {
+			double currentUtility = utilitySpace.getUtilityWithDiscount(bid.getBid(), time);
+			if(currentUtility < minUtility) {
+				minUtility = currentUtility;
+				minBid = bid;
+			}
+		}
+		return new Pair<BidDetails, Double>(minBid, minUtility);
+	}
+	
+	/**
+	 * Get the max bid in a list of BidDetails from session
+	 * Returns null if the list is empty!
+	 */
+	static public Pair<BidDetails, Double> getMaximumBid(NegotiationSession session, List<BidDetails> bids) {
+		return getMaximumBid(session.getUtilitySpace(), bids, session.getTime());
+	}
+	
+	/**
+	 * Get the min bid in a list of BidDetails from session
+	 * Returns null if the list is empty!
+	 */
+	static public Pair<BidDetails, Double> getMinimumBid(NegotiationSession session, List<BidDetails> bids) {
+		return getMinimumBid(session.getUtilitySpace(), bids, session.getTime());
+	}
+	
+	/**
+	 * Get the max bid in a list of BidDetails from opponentmodel
+	 * Returns null if the list is empty!
+	 */
+	static public Pair<BidDetails, Double> getMaximumBid(OpponentModel model, List<BidDetails> bids, double time) {
+		return getMaximumBid(model.getOpponentUtilitySpace(), bids, time);
+	}
+	
+	/**
+	 * Get the min bid in a list of BidDetails from opponentmodel
+	 * Returns null if the list is empty!
+	 */
+	static public Pair<BidDetails, Double> getMinimumBid(OpponentModel model, List<BidDetails> bids, double time) {
+		return getMinimumBid(model.getOpponentUtilitySpace(), bids, time);
+	}
 	
 	/**
 	 * Get the bid with the highest utility from some utility space
