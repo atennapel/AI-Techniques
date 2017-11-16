@@ -2,6 +2,8 @@ package ai2017.group24;
 
 import java.util.Map;
 
+import negotiator.BidHistory;
+import negotiator.bidding.BidDetails;
 import negotiator.boaframework.*;
 
 /**
@@ -12,7 +14,13 @@ import negotiator.boaframework.*;
  */
 public class ACCombiMAXW extends AcceptanceStrategy {
 
+	private double timeConstant = 0.0;
+	
 	public ACCombiMAXW() {
+	}
+	
+	public ACCombiMAXW(double timeConstant) {
+		this.timeConstant = timeConstant;
 	}
 	
 	@Override
@@ -32,9 +40,23 @@ public class ACCombiMAXW extends AcceptanceStrategy {
 		double nextBidUtil = offeringStrategy.getNextBid().getMyUndiscountedUtil();
 		double opponentBidUtil = negotiationSession.getOpponentBidHistory().getLastBidDetails().getMyUndiscountedUtil();
 		
+		double time = negotiationSession.getTime(); //value between [0,1]
+		
+		//System.out.println(time);
+		
+		if(time>timeConstant) {
+			double remTime = 1-time; //time that is still left
+			BidHistory prevBids = negotiationSession.getOpponentBidHistory().filterBetweenTime(time-remTime, time);
+			double maxBid = prevBids.getBestBidDetails().getMyUndiscountedUtil();	
+			//maxBid=maxBid;
+			double a = 0.0;
+			double b = a;
+		}
+			
+		
 		// only accepts if the util of the opponents bid is greater or equal to the util of my next bid
-		if(opponentBidUtil >= nextBidUtil)
-			return Actions.Accept;
+		//if(opponentBidUtil >= nextBidUtil)
+		//	return Actions.Accept;
 		
 		return Actions.Reject;
 	}
