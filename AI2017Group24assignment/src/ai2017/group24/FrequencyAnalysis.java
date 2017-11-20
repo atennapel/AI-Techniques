@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import negotiator.Bid;
 import negotiator.BidHistory;
+import negotiator.Domain;
 import negotiator.boaframework.BOAparameter;
 import negotiator.boaframework.NegotiationSession;
 import negotiator.boaframework.OpponentModel;
@@ -64,28 +65,32 @@ public class FrequencyAnalysis extends OpponentModel {
 	 * Initialize the model by setting all weights and values equal
 	 */
 	private void initializeModel() {
-		opponentUtilitySpace = new AdditiveUtilitySpace(negotiationSession.getDomain());
-		
-		// calculate the default weight of the issues (1 / amount of issues)
-		amountOfIssues = opponentUtilitySpace.getDomain().getIssues().size();
-		double weight = 1.0 / (double) amountOfIssues;
-		
-		// for each objective
-		for(Entry<Objective, Evaluator> entry : opponentUtilitySpace.getEvaluators()) {
-			Objective obj = entry.getKey();
-			Evaluator eval = entry.getValue();
+		try {
+			Domain domain = negotiationSession.getDomain();
+			opponentUtilitySpace = new AdditiveUtilitySpace(domain);
 			
-			// set weight to the weight calculated above
-			opponentUtilitySpace.unlock(obj);
-			eval.setWeight(weight);
+			// calculate the default weight of the issues (1 / amount of issues)
+			amountOfIssues = domain.getIssues().size();
+			double weight = amountOfIssues == 0? 0: 1.0 / (double) amountOfIssues;
 			
-			// set all evaluations to 1 (utilities will all be equal)
-			try {
-				for(ValueDiscrete v : ((IssueDiscrete) obj).getValues())
-					((EvaluatorDiscrete) eval).setEvaluation(v, 1);
-			} catch(Exception e) {
-				e.printStackTrace();
+			// for each objective
+			for(Issue obj : domain.getIssues()) {
+				IssueDiscrete is = (IssueDiscrete) obj;
+				EvaluatorDiscrete eval = new EvaluatorDiscrete();
+				opponentUtilitySpace.addEvaluator(is, eval);
+				
+				// set weight to the weight calculated above
+				opponentUtilitySpace.unlock(is);
+				eval.setWeight(weight);
+				
+				// set all evaluations equal
+				for(ValueDiscrete val : is.getValues()) {
+					eval.setEvaluation(val, 1);
+				}
 			}
+		} catch(Exception e) {
+			System.out.println("FrequencyAnalysis initialization exception");
+			e.printStackTrace();
 		}
 	}
 
