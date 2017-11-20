@@ -10,20 +10,21 @@ import negotiator.boaframework.*;
  * 
  * @author Albert ten Napel
  */
-public class BestBidForOpponent extends OfferingStrategy {
+public class BestBidForOpponentStubborn extends OfferingStrategy {
 	
+	private double firstN = 5;
 	private double minUtility = 0.8;
 	private double maxUtility = 1;
 	
 	@Override
 	public String getName() {
-		return "BestBidForOpponent";
+		return "TestBidder";
 	}
 	
-	public BestBidForOpponent() {
+	public BestBidForOpponentStubborn() {
 	}
 	
-	public BestBidForOpponent(double minUtility, double maxUtility) {
+	public BestBidForOpponentStubborn(double minUtility, double maxUtility) {
 		this.minUtility = minUtility;
 		this.maxUtility = maxUtility;
 	}
@@ -59,10 +60,15 @@ public class BestBidForOpponent extends OfferingStrategy {
 	}
 	
 	private BidDetails getNewBid() throws Exception {
-		/*
-		 * Get the bids we can make that have an utility between minUtility and maxUtility and select one according to the OM strategy.
-		 */
-		return omStrategy.getBid(Util.getBidsInRange(negotiationSession, minUtility, maxUtility));
+		int amountOfBidsDone = negotiationSession.getOwnBidHistory().size();
+		if(amountOfBidsDone < firstN) {
+			return omStrategy.getBid(Util.getBidsInRange(negotiationSession, 1, 1));
+		} else {		
+			/*
+			 * Get the bids we can make that have an utility between minUtility and maxUtility and select one according to the OM strategy.
+			 */
+			return omStrategy.getBid(Util.getBidsInRange(negotiationSession, minUtility, maxUtility));
+		}
 	}
 
 }
