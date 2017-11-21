@@ -14,7 +14,7 @@ import negotiator.boaframework.*;
  */
 public class ACCombiMAXW extends AcceptanceStrategy {
 
-	private double timeConstant = 0.0;
+	private double timeConstant = 0.99;
 	
 	public ACCombiMAXW() {
 	}
@@ -36,27 +36,25 @@ public class ACCombiMAXW extends AcceptanceStrategy {
 	}
 	
 	@Override
-	public Actions determineAcceptability() {
+	public Actions determineAcceptability() {	
 		double nextBidUtil = offeringStrategy.getNextBid().getMyUndiscountedUtil();
 		double opponentBidUtil = negotiationSession.getOpponentBidHistory().getLastBidDetails().getMyUndiscountedUtil();
 		
-		double time = negotiationSession.getTime(); //value between [0,1]
+		// only accepts if the util of the opponents bid is greater or equal to the util of my next bid
+		if(opponentBidUtil >= nextBidUtil)
+			return Actions.Accept;
 		
-		//System.out.println(time);
+		double time = negotiationSession.getTime(); //value between [0,1]
+		System.out.println("time is: "+time);
 		
 		if(time>timeConstant) {
 			double remTime = 1-time; //time that is still left
 			BidHistory prevBids = negotiationSession.getOpponentBidHistory().filterBetweenTime(time-remTime, time);
+			int BidsInHist = prevBids.size();
 			double maxBid = prevBids.getBestBidDetails().getMyUndiscountedUtil();	
-			//maxBid=maxBid;
-			double a = 0.0;
-			double b = a;
-		}
-			
-		
-		// only accepts if the util of the opponents bid is greater or equal to the util of my next bid
-		//if(opponentBidUtil >= nextBidUtil)
-		//	return Actions.Accept;
+			if(opponentBidUtil >= maxBid)
+				return Actions.Accept;
+		}	
 		
 		return Actions.Reject;
 	}

@@ -21,7 +21,7 @@ public class Group24 extends BOAagent {
 	@Override
 	public void agentSetup() {		
 		// create all the boa components
-		AcceptanceStrategy acStrategy = new ACNext();
+		AcceptanceStrategy acStrategy = new ACCombiMAXW();
 		OfferingStrategy bidder = new BestBidForOpponent();
 		OpponentModel model = new FrequencyAnalysis();
 		OMStrategy omStrategy = new BestBid();
