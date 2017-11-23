@@ -3,7 +3,6 @@ package ai2017.group24;
 import java.util.Map;
 
 import negotiator.BidHistory;
-import negotiator.bidding.BidDetails;
 import negotiator.boaframework.*;
 
 /**
