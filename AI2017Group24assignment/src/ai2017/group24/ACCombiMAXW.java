@@ -45,13 +45,14 @@ public class ACCombiMAXW extends AcceptanceStrategy {
 			return Actions.Accept;
 		
 		double time = negotiationSession.getTime(); //value between [0,1]
-		System.out.println("time is: "+time);
 		
 		if(time>timeConstant) {
 			double remTime = 1-time; //time that is still left
 			BidHistory prevBids = negotiationSession.getOpponentBidHistory().filterBetweenTime(time-remTime, time);
-			int BidsInHist = prevBids.size();
-			double maxBid = prevBids.getBestBidDetails().getMyUndiscountedUtil();	
+			//int BidsInHist = prevBids.size();
+			double maxBid = prevBids.getBestBidDetails().getMyUndiscountedUtil();
+			
+			// accepts if opponents bid is higher than the maximum of his previous bids in specified time frame
 			if(opponentBidUtil >= maxBid)
 				return Actions.Accept;
 		}	
