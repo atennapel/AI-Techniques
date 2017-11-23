@@ -105,6 +105,6 @@ print 'Average distance to Nash:', total['nash']
 print
 for agent in total['agents']:
   print agent
-  print "Average utility:", total['utilities'][agent]
-  print "Amount of wins:", total['wins'][agent]
+  print "Average utility:", init(total['utilities'], agent, 0, True)
+  print "Amount of wins:", init(total['wins'], agent, 0, True)
   print
