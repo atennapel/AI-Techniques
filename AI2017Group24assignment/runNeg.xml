@@ -3,7 +3,7 @@
 	<tournaments>
 		<tournament>
 			<deadline>
-				<value>12</value>
+				<value>60</value>
 				<type>TIME</type>
 			</deadline>
 			<protocolItem hasMediatorProfile="false" hasMediator="false"
@@ -26,7 +26,7 @@
 				<item url="file:etc/templates/partydomain/party2_utility.xml" />
 				<item url="file:etc/templates/partydomain/party3_utility.xml" />
 			</partyProfileItems>
-			<repeats>1</repeats>
+			<repeats>3</repeats>
 			<numberOfPartiesPerSession>3</numberOfPartiesPerSession>
 			<repetitionAllowed>false</repetitionAllowed>
 			<persistentDataType>DISABLED</persistentDataType>
