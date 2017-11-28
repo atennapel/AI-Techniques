@@ -60,7 +60,9 @@ def parseCSV(filename):
       init(data['allUtilities'], agent2, [], True).append(util2)
       init(data['allUtilities'], agent3, [], True).append(util3)
       maxutil = max([util1, util2, util3])
-      if maxutil == util1:
+      if maxutil == 0:
+        pass
+      elif maxutil == util1:
         init(data['wins'], agent1, 0)[agent1] += 1
       elif maxutil == util2:
         init(data['wins'], agent2, 0)[agent2] += 1
