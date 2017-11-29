@@ -234,6 +234,8 @@ public class FrequencyAnalysis extends OpponentModel {
 		return Math.sqrt(sum / l.size());
 	}
 	
+	private double lastW = -1;
+	private double lastV = -1;
 	private void differenceFromPartyProfile1(AdditiveUtilitySpace space) throws Exception {
 		ArrayList<Double> wlist = new ArrayList<Double>();
 		ArrayList<Double> vlist = new ArrayList<Double>();
@@ -244,7 +246,13 @@ public class FrequencyAnalysis extends OpponentModel {
 			for(ValueDiscrete val : obj.getValues())
 				vlist.add(ev.getEvaluation(val) - evals.get(obj.getName()).get(val.getValue()));
 		}
-		System.out.printf("%.4f %.4f %.4f\n", negotiationSession.getTime(), rme(wlist), rme(vlist));
+		double newW = rme(wlist);
+		double newV = rme(vlist);
+		if(newW != lastW || newV != lastV) {
+			lastW = newW;
+			lastV = newV;
+			System.out.printf("%.4f,%.4f,%.4f\n", negotiationSession.getTime(), newW, newV);
+		}
 	}
 
 }
