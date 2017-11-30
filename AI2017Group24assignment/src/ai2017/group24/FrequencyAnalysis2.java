@@ -34,8 +34,10 @@ public class FrequencyAnalysis2 extends OpponentModel {
 	private int amountOfIssues;
 	
 	private AdditiveUtilitySpace opponentUtilitySpace2;
+	private final PartyProfile1Measure measure;
 	
 	public FrequencyAnalysis2() {
+		measure = new PartyProfile1Measure();
 	}
 	
 	@Override
@@ -176,6 +178,7 @@ public class FrequencyAnalysis2 extends OpponentModel {
 	@Override
 	public double getBidEvaluation(Bid bid) {
 		try {
+			// measure.differenceFromPartyProfile1(opponentUtilitySpace, negotiationSession.getTime());
 			return opponentUtilitySpace.getUtility(bid);
 		} catch(Exception e) {
 			e.printStackTrace();

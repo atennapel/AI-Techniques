@@ -2,9 +2,7 @@ package ai2017.group24;
 
 import negotiator.boaframework.AcceptanceStrategy;
 import negotiator.boaframework.BOAagent;
-import negotiator.boaframework.OMStrategy;
 import negotiator.boaframework.OfferingStrategy;
-import negotiator.boaframework.OpponentModel;
 
 /**
  * The agent of group 24 for AI Techniques 2017
@@ -23,15 +21,15 @@ public class Group24 extends BOAagent {
 		// create all the boa components
 		AcceptanceStrategy acStrategy = new ACCombiMAXT();
 		OfferingStrategy bidder = new BestBidForOpponent();
-		OpponentModel model = new FrequencyAnalysis2();
-		OMStrategy omStrategy = new BestBid2();
+		FrequencyAnalysis2 model = new FrequencyAnalysis2();
+		BestBid2 omStrategy = new BestBid2();
 		
 		// initialize them
 		try {
 			acStrategy.init(negotiationSession, bidder, model, null);
 			bidder.init(negotiationSession, model, omStrategy, null);
 			model.init(negotiationSession, null);
-			omStrategy.init(negotiationSession, model, null);
+			omStrategy.init2(negotiationSession, model, null);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
