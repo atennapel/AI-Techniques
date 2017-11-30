@@ -11,6 +11,13 @@ import negotiator.utility.AdditiveUtilitySpace;
 import negotiator.utility.Evaluator;
 import negotiator.utility.EvaluatorDiscrete;
 
+/**
+ * Compares a utility space with a specific party profile 1.
+ * Uses RMSE to calculate the error.
+ * Used to measure the performance of the opponent modeller.
+ * 
+ * @author Albert ten Napel
+ */
 public class PartyProfile1Measure {
 	
 	/**

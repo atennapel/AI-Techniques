@@ -14,6 +14,7 @@ import negotiator.boaframework.OpponentModel;
  * Adapted from boaexamplepackage/BestBid
  * 
  * @author Albert ten Napel
+ * @author Nirul Hoeba
  */
 public class BestBid extends OMStrategy {
 	

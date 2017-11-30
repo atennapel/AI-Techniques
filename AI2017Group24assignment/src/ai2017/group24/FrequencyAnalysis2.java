@@ -34,10 +34,10 @@ public class FrequencyAnalysis2 extends OpponentModel {
 	private int amountOfIssues;
 	
 	private AdditiveUtilitySpace opponentUtilitySpace2;
-	private final PartyProfile1Measure measure;
+	// private final PartyProfile1Measure measure;
 	
 	public FrequencyAnalysis2() {
-		measure = new PartyProfile1Measure();
+		// measure = new PartyProfile1Measure();
 	}
 	
 	@Override

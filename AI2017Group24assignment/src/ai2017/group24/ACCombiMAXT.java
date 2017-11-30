@@ -9,7 +9,7 @@ import negotiator.boaframework.*;
  * Group 24 Acceptance strategy
  * Adapted from boaexamplepackage/AC_Next
  * 
- * @author Albert ten Napel
+ * @author Luc Hogervorst
  */
 public class ACCombiMAXT extends AcceptanceStrategy {
 
@@ -46,7 +46,6 @@ public class ACCombiMAXT extends AcceptanceStrategy {
 		double time = negotiationSession.getTime(); //value between [0,1]
 		
 		if(time>timeConstant) {
-			double remTime = 1-time; //time that is still left
 			BidHistory prevBids = negotiationSession.getOpponentBidHistory().filterBetweenTime(0, time);
 			//int BidsInHist = prevBids.size();
 			double maxBid = prevBids.getBestBidDetails().getMyUndiscountedUtil();

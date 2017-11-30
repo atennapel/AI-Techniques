@@ -9,7 +9,7 @@ import negotiator.boaframework.*;
  * Group 24 Acceptance strategy
  * Adapted from boaexamplepackage/AC_Next
  * 
- * @author Albert ten Napel
+ * @author Luc Hogervorst
  */
 public class ACCombiMAXW extends AcceptanceStrategy {
 

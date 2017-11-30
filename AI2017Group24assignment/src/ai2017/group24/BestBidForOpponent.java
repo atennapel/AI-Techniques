@@ -9,6 +9,7 @@ import negotiator.boaframework.*;
  * Get the best bid for an opponent selected from a generated list of bids.
  * 
  * @author Albert ten Napel
+ * @author Nirul Hoeba
  */
 public class BestBidForOpponent extends OfferingStrategy {
 	
