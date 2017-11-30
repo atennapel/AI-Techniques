@@ -47,6 +47,8 @@ public class ACCombiMAXT extends AcceptanceStrategy {
 		
 		if(time>timeConstant) {
 			BidHistory prevBids = negotiationSession.getOpponentBidHistory().filterBetweenTime(0, time);
+			if(prevBids.size() == 0)
+				return Actions.Reject;
 			//int BidsInHist = prevBids.size();
 			double maxBid = prevBids.getBestBidDetails().getMyUndiscountedUtil();
 			

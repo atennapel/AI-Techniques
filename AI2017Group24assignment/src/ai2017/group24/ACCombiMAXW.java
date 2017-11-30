@@ -48,6 +48,8 @@ public class ACCombiMAXW extends AcceptanceStrategy {
 		if(time>timeConstant) {
 			double remTime = 1-time; //time that is still left
 			BidHistory prevBids = negotiationSession.getOpponentBidHistory().filterBetweenTime(time-remTime, time);
+			if(prevBids.size() == 0)
+				return Actions.Reject;
 			//int BidsInHist = prevBids.size();
 			double maxBid = prevBids.getBestBidDetails().getMyUndiscountedUtil();
 			
