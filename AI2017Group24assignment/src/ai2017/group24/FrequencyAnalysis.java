@@ -86,7 +86,7 @@ public class FrequencyAnalysis extends OpponentModel {
 				
 				// set all evaluations equal
 				for(ValueDiscrete val : is.getValues()) {
-					eval.setEvaluation(val, 1);
+					eval.setEvaluation(val, 0);
 				}
 			}
 		} catch(Exception e) {
