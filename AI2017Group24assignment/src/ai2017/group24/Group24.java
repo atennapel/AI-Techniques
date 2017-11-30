@@ -23,8 +23,8 @@ public class Group24 extends BOAagent {
 		// create all the boa components
 		AcceptanceStrategy acStrategy = new ACCombiMAXT();
 		OfferingStrategy bidder = new BestBidForOpponent();
-		OpponentModel model = new FrequencyAnalysis();
-		OMStrategy omStrategy = new BestBid();
+		OpponentModel model = new FrequencyAnalysis2();
+		OMStrategy omStrategy = new BestBid2();
 		
 		// initialize them
 		try {
